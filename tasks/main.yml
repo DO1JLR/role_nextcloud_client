@@ -23,9 +23,8 @@
 
 - name: enable nextcloud client
   systemd: 
-    state: enabled
+    enabled: yes
     name: nextcloud
-    daemon_reload: yes
   become: yes
 
 
