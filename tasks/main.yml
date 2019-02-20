@@ -1,0 +1,25 @@
+---
+
+- name: install nextcloud-client
+  package:
+    name:
+    - nextcloud-client
+    - gnome-keyring
+    state: present
+  become: yes
+
+- name: install nextcloud systemd unit file
+  template:
+    src: templates/nextcloud.j2
+    dest: /etc/systemd/system/nextcloud.service
+  become: yes
+
+- name: start nextcloud client
+  systemd: 
+    state: started
+    name: nextcloud
+    daemon_reload: yes
+  become: yes
+
+
+
