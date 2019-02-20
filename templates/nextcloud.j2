@@ -1,11 +1,14 @@
 [Unit]
 Description=Nextcloud Client
+Requires=network.target local-fs.target
+After=network.target local-fs.target
 
 [Service]
+User={{ ansible_user_id }}
 Type=simple
-ExecStart=/usr/bin/nextcloud
-ExecReload=/bin/kill -HUP $MAINPID
-KillMode=process
+ExecStart=/usr/local/bin/launch-nextcloud-client.sh start
+ExecStop=/usr/local/bin/launch-nextcloud-client.sh stop
+WorkingDirectory=/home/l3d
 Restart=on-failure
 
 [Install]

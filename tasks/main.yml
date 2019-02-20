@@ -5,7 +5,17 @@
     name:
     - nextcloud-client
     - gnome-keyring
+    - libsecret
+    - tmux
     state: present
+  become: yes
+
+- name: create nextcloud tmux launcher
+  template:
+    src: templates/nextcloud-client-launcher.sh.j2
+    dest: /usr/local/bin/launch-nextcloud-client.sh
+    mode: 0755
+    owner: root
   become: yes
 
 - name: install nextcloud systemd unit file

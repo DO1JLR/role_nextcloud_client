@@ -1,0 +1,16 @@
+#!/bin/bash
+case $1 in
+	start)
+        sudo su -l l3d
+        export DISPLAY=:0
+		tmux new -d -s nextcloud 'nextcloud'
+	;;
+	stop)
+        sudo su -l l3d
+        export DISPLAY=:0
+		tmux send -t nextcloud ^C C-m
+	;;
+	*)
+		echo "usage $0 {start|stop}"
+esac
+exit 0
