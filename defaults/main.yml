@@ -1,1 +1,7 @@
+---
+# version check for this role?
+submodules_versioncheck: true
+
+# launch it via systemd
+# probably broken because I did not complete implementing it. Sorry :-/
 run_systemd: false

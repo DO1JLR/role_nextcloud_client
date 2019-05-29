@@ -1,4 +1,6 @@
 ---
+- include_tasks: versioncheck.yml
+  when: submodules_versioncheck|bool
 
 - name: install nextcloud-client
   package:
@@ -17,28 +19,28 @@
     mode: 0755
     owner: root
   become: yes
-  when: run_systemd
+  when: run_systemd | bool
 
 - name: install nextcloud systemd unit file
   template:
     src: templates/nextcloud.j2
     dest: /etc/systemd/system/nextcloud.service
   become: yes
-  when: run_systemd
+  when: run_systemd | bool
 
 - name: start nextcloud client
-  systemd: 
+  systemd:
     state: restarted
     name: nextcloud
     daemon_reload: yes
   become: yes
-  when: run_systemd
+  when: run_systemd | bool
 
 - name: enable nextcloud client
-  systemd: 
+  systemd:
     enabled: yes
     name: nextcloud
   become: yes
-  when: run_systemd
+  when: run_systemd | bool
 
 
