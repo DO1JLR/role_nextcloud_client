@@ -1,3 +1,3 @@
 ---
-playbook_version_number: 8000 # should be over ninethousand
-playbook_version_path: '/etc/ansible-version/role-nextcloud_client_chaos-bodensee_github.com.version' 
+playbook_version_number: 8001 # should be over ninethousand
+playbook_version_path: 'role-nextcloud_client_chaos-bodensee_github.com.version' 
