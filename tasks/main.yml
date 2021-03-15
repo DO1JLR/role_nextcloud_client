@@ -1,46 +1,45 @@
 ---
-- include_tasks: versioncheck.yml
+- name: run optional versionscheck
+  ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck|bool
 
 - name: install nextcloud-client
-  package:
+  ansible.builtin.package:
     name:
     - nextcloud-client
     - gnome-keyring
     - libsecret
     - tmux
     state: present
-  become: yes
+  become: true
 
 - name: create nextcloud tmux launcher
-  template:
+  ansible.builtin.template:
     src: templates/nextcloud-client-launcher.sh.j2
     dest: /usr/local/bin/launch-nextcloud-client.sh
     mode: 0755
     owner: root
-  become: yes
+  become: true
   when: run_systemd | bool
 
 - name: install nextcloud systemd unit file
-  template:
+  ansible.builtin.template:
     src: templates/nextcloud.j2
     dest: /etc/systemd/system/nextcloud.service
-  become: yes
+  become: true
   when: run_systemd | bool
 
 - name: start nextcloud client
-  systemd:
+  ansible.builtin.systemd:
     state: restarted
     name: nextcloud
-    daemon_reload: yes
-  become: yes
+    daemon_reload: true
+  become: true
   when: run_systemd | bool
 
 - name: enable nextcloud client
-  systemd:
-    enabled: yes
+  ansible.builtin.systemd:
+    enabled: true
     name: nextcloud
-  become: yes
+  become: true
   when: run_systemd | bool
-
-
